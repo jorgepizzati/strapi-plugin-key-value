@@ -63,10 +63,10 @@
     "kind": "plugin",
     "name": "key-value",
     "displayName": "Key Value Pairs",
-    "description": "Create key value pairs test"
+    "description": "Create key value pairs"
   },
   "name": "strapi-plugin-key-value",
-  "description": "Create key value pairs test",
+  "description": "Create key value pairs",
   "license": "MIT",
   "author": "jpizzati-uvl <jpizzati@uvltd.com>"
 }
