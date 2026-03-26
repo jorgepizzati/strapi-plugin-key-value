@@ -1,8 +1,7 @@
-
-import { useState, useEffect } from "react";
-import { TextInput, Button } from "@strapi/design-system";
+import { useState, useEffect } from 'react';
+import { TextInput, Button } from '@strapi/design-system';
 import { Field } from '@strapi/design-system';
-import { InputWrapper, LayoutCell } from "./styled-components";
+import { InputWrapper, LayoutCell } from './styled-components';
 
 const keyRegex = /^[a-zA-Z0-9_-]+$/;
 const valueRegex = /.*\S.*/;
@@ -24,7 +23,6 @@ const SearchResultsItem = (props) => {
     if (newKey) {
       if (newKey.match(keyRegex)) {
         setKey(newKey);
-        props.updatePair(key, newKey, value, undefined);
       } else {
         setInvalidKey(true);
       }
@@ -35,13 +33,13 @@ const SearchResultsItem = (props) => {
 
   const updateValue = (newValue) => {
     if (newValue && newValue.match(valueRegex)) {
-      const sanitizedValue = newValue.replace(/^\s+|\s+$/g, "");
+      const sanitizedValue = newValue.replace(/^\s+|\s+$/g, '');
 
       setValue(sanitizedValue);
-      props.updatePair(key, undefined, value, sanitizedValue);
+      props.updatePair(key, sanitizedValue);
     } else {
-      setValue(null);
-      props.updatePair(key, undefined, value, null);
+      setValue('');
+      props.updatePair(key, '');
     }
   };
 
@@ -57,9 +55,7 @@ const SearchResultsItem = (props) => {
   return (
     <>
       <InputWrapper padding={2} col={4} s={12}>
-        <Field.Root error={
-          invalidKey ? keyRegexError : emptyKey ? keyEmptyError : null
-        }>
+        <Field.Root error={invalidKey ? keyRegexError : emptyKey ? keyEmptyError : null}>
           <TextInput
             disabled
             name="key"
@@ -68,7 +64,6 @@ const SearchResultsItem = (props) => {
             value={key}
             onChange={(e) => updateKey(e.target.value)}
             onBlur={(e) => updateKey(e.target.value)}
-
           />
           <Field.Error />
         </Field.Root>
@@ -86,7 +81,7 @@ const SearchResultsItem = (props) => {
 
       <LayoutCell padding={2} xs={2}>
         {!(invalidKey || emptyKey) && (
-          <Button variant="danger" fullWidth onClick={deletePair}>
+          <Button variant="danger" fullWidth size="L" onClick={deletePair}>
             Delete
           </Button>
         )}

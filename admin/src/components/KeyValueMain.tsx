@@ -4,7 +4,14 @@ import SearchPair from './SearchPair';
 import { MainWrapper } from './styled-components';
 
 export default function KeyValueMain({ attribute, error, name, onChange, value }) {
-  const [data, setData] = useState([]);
+  // Initialize with the initial value to prevent flash of empty state
+  const [data, setData] = useState(() => {
+    try {
+      return Object.entries(value || {});
+    } catch {
+      return [];
+    }
+  });
   const [existingKey, setExistingKey] = useState('');
   const [hightlightSaveButton, setHightlightSaveButton] = useState(false);
 
@@ -54,11 +61,20 @@ export default function KeyValueMain({ attribute, error, name, onChange, value }
     setHightlightSaveButton(true);
   };
 
+  // Rerun if switching between draft/published tabs
   useEffect(() => {
     if (value) {
-      parseValue(value);
+      // Only parse if it's an object, not a string
+      if (typeof value === 'object' && !Array.isArray(value)) {
+        const currentDataString = JSON.stringify(Object.fromEntries(data));
+        const newValueString = JSON.stringify(value);
+
+        if (currentDataString !== newValueString) {
+          parseValue(value);
+        }
+      }
     }
-  }, []);
+  }, [value]);
 
   useEffect(() => {
     if (hightlightSaveButton) {
@@ -69,6 +85,7 @@ export default function KeyValueMain({ attribute, error, name, onChange, value }
           type: attribute.type,
         },
       });
+      setHightlightSaveButton(false);
     }
   }, [data, hightlightSaveButton]);
 
@@ -87,4 +104,4 @@ export default function KeyValueMain({ attribute, error, name, onChange, value }
       />
     </MainWrapper>
   );
-};
+}
