@@ -80,7 +80,6 @@ export default function KeyValueMain({ attribute, error, name, onChange, value }
           type: attribute.type,
         },
       });
-      setHightlightSaveButton(false);
     }
   }, [data, hightlightSaveButton]);
 
