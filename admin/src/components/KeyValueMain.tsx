@@ -65,13 +65,8 @@ export default function KeyValueMain({ attribute, error, name, onChange, value }
   useEffect(() => {
     if (value) {
       // Only parse if it's an object, not a string
-      if (typeof value === 'object' && !Array.isArray(value)) {
-        const currentDataString = JSON.stringify(Object.fromEntries(data));
-        const newValueString = JSON.stringify(value);
-
-        if (currentDataString !== newValueString) {
-          parseValue(value);
-        }
+      if (typeof value === 'object') {
+        parseValue(value);
       }
     }
   }, [value]);
