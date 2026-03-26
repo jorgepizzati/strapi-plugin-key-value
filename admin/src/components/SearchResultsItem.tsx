@@ -81,7 +81,7 @@ const SearchResultsItem = (props) => {
 
       <LayoutCell padding={2} xs={2}>
         {!(invalidKey || emptyKey) && (
-          <Button variant="danger" fullWidth size="L" onClick={deletePair}>
+          <Button variant="danger" fullWidth onClick={deletePair}>
             Delete
           </Button>
         )}
