@@ -1,6 +1,6 @@
 import { PLUGIN_ID } from './pluginId';
 import { Initializer } from './components/Initializer';
-import CustomFieldIcon from "./components/CustomFieldIcon";
+import CustomFieldIcon from './components/CustomFieldIcon';
 
 export default {
   register(app: any) {
@@ -25,7 +25,9 @@ export default {
         defaultMessage: 'Key Value Pairs',
       },
       components: {
-        Input: async () => import("./components/KeyValueMain"),
+        Input: async () => import('./components/KeyValueMain').then((module) => ({
+          default: module.KeyValueMain,
+        })),
       },
       options: {},
     });
