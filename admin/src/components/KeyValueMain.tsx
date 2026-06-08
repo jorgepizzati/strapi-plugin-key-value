@@ -3,7 +3,7 @@ import AddPair from './AddPair';
 import SearchPair from './SearchPair';
 import { MainWrapper } from './styled-components';
 
-export default function KeyValueMain({ attribute, error, name, onChange, value }) {
+export const KeyValueMain = ({ attribute, error, name, onChange, value }) => {
   // Initialize with the initial value to prevent flash of empty state
   const [data, setData] = useState(() => {
     try {
@@ -98,4 +98,4 @@ export default function KeyValueMain({ attribute, error, name, onChange, value }
       />
     </MainWrapper>
   );
-}
+};
